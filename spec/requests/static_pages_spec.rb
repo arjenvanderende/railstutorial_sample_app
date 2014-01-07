@@ -2,63 +2,34 @@ require 'spec_helper'
 
 describe "Static pages" do
 
-  let(:base_title) { "Ruby on Rails Tutorial Sample App" }
+  subject { page }
 
   describe "Home" do
+    before { visit root_path }
 
-    it "has the content 'Sample App'" do
-      visit root_path
-      expect(page).to have_content('Sample App')
-    end
-
-    it "has the right title" do
-      visit root_path
-      expect(page).to have_title("#{base_title}")
-    end
-
-    it "has no custom page title" do
-      visit root_path
-      expect(page).not_to have_title('Home |')
-    end
+    it { should have_content('Sample App') }
+    it { should have_title(full_title('')) }
+    it { should_not have_title('Home |') }
   end
 
   describe "Help" do
+    before { visit help_path }
 
-    it "has the content 'Help'" do
-      visit help_path
-
-      expect(page).to have_content('Help')
-    end
-
-    it "has the right title" do
-      visit help_path
-      expect(page).to have_title("Help | #{base_title}")
-    end
+    it { should  have_content('Help') }
+    it { should have_title(full_title('Help')) }
   end
 
   describe "About" do
+    before { visit about_path }
 
-    it "has the content 'About Us'" do
-      visit about_path
-      expect(page).to have_content('About Us')
-    end
-
-    it "has the right title" do
-      visit about_path
-      expect(page).to have_title("About Us | #{base_title}")
-    end
+    it { should have_content('About Us') }
+    it { should have_title(full_title('About Us')) }
   end
 
   describe "Contact" do
+    before { visit contact_path }
 
-    it "has the content 'Contact'" do
-      visit contact_path
-      expect(page).to have_content('Contact')
-    end
-
-    it "has the right title" do
-      visit contact_path
-      expect(page).to have_title("Contact | #{base_title}")
-    end
+    it { should have_content('Contact') }
+    it { should have_title(full_title('Contact')) }
   end
 end
