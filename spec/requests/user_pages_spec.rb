@@ -5,10 +5,18 @@ describe "User pages" do
   subject { page }
 
   describe "signup page" do
+
     before { visit signup_path }
+    let(:submit) { "Create my account" }
 
     it { should have_content('Sign up') }
     it { should have_title(full_title('Sign up')) }
+
+    describe "with invalid information" do
+      it "should not create a user" do
+        expect { click_button submit }.not_to change(User, :count)
+      end
+    end
   end
 
   describe "profile page" do
