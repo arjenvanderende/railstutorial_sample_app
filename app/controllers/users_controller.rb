@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    render 'new'
+    if @user.save
+      redirect_to @user
+    else
+      render 'new'
+    end
   end
 
   private
